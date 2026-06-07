@@ -3,14 +3,16 @@ package com.example.fooddelivery.entity;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "orders")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class FoodOrder {
 
     @Id
-    @GeneratedValue(strategy =
-            GenerationType.IDENTITY)
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
@@ -23,9 +25,8 @@ public class FoodOrder {
 
     private LocalDateTime orderDate;
 
-    @OneToMany(mappedBy = "foodOrder",
-            cascade = CascadeType.ALL)
-    private List<OrderItem> orderItems;
+    @OneToMany(mappedBy = "foodOrder", cascade = CascadeType.ALL) 
+    @JsonManagedReference private List<OrderItem> orderItems;
 
 	/**
 	 * @return the id

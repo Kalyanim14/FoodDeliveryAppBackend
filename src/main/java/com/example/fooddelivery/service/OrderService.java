@@ -8,5 +8,16 @@ public interface OrderService {
 
     FoodOrder placeOrder(Long userId);
 
+
+    FoodOrder getOrderById(Long orderId);
+    
     List<FoodOrder> getOrdersByUser(Long userId);
+
+    FoodOrder updateOrderStatus(
+            Long orderId,
+            String status);
+
+    void deleteOrder(Long orderId);
+
+
 }

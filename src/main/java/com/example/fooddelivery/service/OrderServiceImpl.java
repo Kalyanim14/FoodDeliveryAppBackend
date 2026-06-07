@@ -2,6 +2,7 @@ package com.example.fooddelivery.service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
 
@@ -61,27 +62,35 @@ public class OrderServiceImpl
 
         order = orderRepo.save(order);
 
-        for(Cart cart : cartItems){
+        		List<OrderItem> orderItems =
+        		        new ArrayList<>();
 
-            OrderItem item =
-                    new OrderItem();
+        		for(Cart cart : cartItems){
 
-            item.setFoodOrder(order);
-            item.setFoodItem(
-                    cart.getFoodItem());
+        		    OrderItem item =
+        		            new OrderItem();
 
-            item.setQuantity(
-                    cart.getQuantity());
+        		    item.setFoodOrder(order);
 
-            item.setPrice(
-                    cart.getFoodItem()
-                    .getPrice());
+        		    item.setFoodItem(
+        		            cart.getFoodItem());
 
-            total += item.getPrice()
-                    * item.getQuantity();
+        		    item.setQuantity(
+        		            cart.getQuantity());
 
-            orderItemRepo.save(item);
-        }
+        		    item.setPrice(
+        		            cart.getFoodItem()
+        		            .getPrice());
+
+        		    total += item.getPrice()
+        		            * item.getQuantity();
+
+        		    orderItems.add(item);
+
+        		    orderItemRepo.save(item);
+        		}
+
+        		order.setOrderItems(orderItems);
 
         order.setTotalAmount(total);
 
@@ -99,4 +108,32 @@ public class OrderServiceImpl
         return orderRepo.findByUserId(
                 userId);
     }
+
+    public FoodOrder updateOrderStatus(Long orderId, String status) {
+
+        FoodOrder order =
+                orderRepo.findById(orderId)
+                        .orElseThrow(() ->
+                                new RuntimeException(
+                                        "Order not found"));
+
+        order.setStatus(status);
+
+        return orderRepo.save(order);
+    }
+
+    public void deleteOrder(Long orderId) {
+
+        orderRepo.deleteById(orderId);
+    }
+
+    public FoodOrder getOrderById(Long orderId) {
+
+        return orderRepo.findById(orderId)
+                .orElseThrow(() ->
+                        new RuntimeException(
+                                "Order not found"));
+    }
+
+
 }

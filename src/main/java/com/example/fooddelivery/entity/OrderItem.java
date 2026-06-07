@@ -1,6 +1,7 @@
 package com.example.fooddelivery.entity;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name="order_items")
@@ -11,6 +12,8 @@ public class OrderItem {
             GenerationType.IDENTITY)
     private Long id;
 
+    @JsonBackReference
+    
     @ManyToOne
     @JoinColumn(name="order_id")
     private FoodOrder foodOrder;
