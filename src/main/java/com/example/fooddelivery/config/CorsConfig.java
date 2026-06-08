@@ -22,7 +22,7 @@ public class CorsConfig {
         config.setAllowCredentials(true);
 
         config.setAllowedOrigins(
-                List.of("http://localhost:5173"));
+                List.of("http://localhost:5173","https://*.vercel.app/"));
 
         config.setAllowedHeaders(
                 List.of("*"));
