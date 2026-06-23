@@ -116,22 +116,6 @@ GET  /api/orders
 POST /api/orders
 ```
 
-## Application Screenshots
-
-### API Testing
-
-![API Testing](screenshots/api-testing.png)
-
-### Database Schema
-
-![Database Schema](screenshots/database-schema.png)
-
-### Authentication Flow
-
-![Authentication Flow](screenshots/authentication.png)
-
-> Create a `screenshots` folder in the repository root and replace the images above with actual screenshots from Postman, Swagger, or database diagrams.
-
 ## Project Structure
 
 ```text
@@ -157,7 +141,7 @@ src/main/java
 ### Clone Repository
 
 ```bash
-git clone <repository-url>
+git clone (https://github.com/Kalyanim14/FoodDeliveryAppBackend.git)
 ```
 
 ### Configure Database
